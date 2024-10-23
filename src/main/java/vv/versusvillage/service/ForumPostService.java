@@ -5,6 +5,7 @@ import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vv.versusvillage.domain.ForumPost;
+import vv.versusvillage.exception.ForumPostNotFoundException;
 import vv.versusvillage.repository.ForumPostRepository;
 
 import java.time.LocalDateTime;
@@ -49,7 +50,14 @@ public class ForumPostService {
     }
 
     @Transactional
+    public ForumPost updatePost(ForumPost forumPost) {
+        return forumPostRepository.update(forumPost);
+    }
+
+    @Transactional
     public void deletePost(Long id) {
-        forumPostRepository.delete(id);
+        ForumPost deletePost = forumPostRepository.findById(id)
+                .orElseThrow(() -> new ForumPostNotFoundException("해당 포스트는 존재하지 않습니다."));
+        forumPostRepository.delete(deletePost);
     }
 }

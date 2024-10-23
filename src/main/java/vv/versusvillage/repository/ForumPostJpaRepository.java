@@ -21,12 +21,13 @@ public class ForumPostJpaRepository implements ForumPostRepository {
 
     @Override
     public ForumPost save(ForumPost forumPost) {
-        if (forumPost.getForumPostId() != null) {
-            return em.merge(forumPost);
-        } else {
-            em.persist(forumPost);
-            return forumPost;
-        }
+        em.persist(forumPost);
+        return forumPost;
+    }
+
+    @Override
+    public ForumPost update(ForumPost forumPost) {
+        return em.merge(forumPost);
     }
 
     @Override
@@ -57,9 +58,10 @@ public class ForumPostJpaRepository implements ForumPostRepository {
     }
 
     @Override
-    public void delete(Long id) {
-        em.createQuery("delete from ForumPost f where f.forumPostId = :id", ForumPost.class)
-                .setParameter("id", id)
-                .executeUpdate();
+    public void delete(ForumPost forumPost) {
+        em.remove(forumPost);
+//        em.createQuery("delete from ForumPost f where f.forumPostId = :id", ForumPost.class)
+//                .setParameter("id", id)
+//                .executeUpdate();
     }
 }

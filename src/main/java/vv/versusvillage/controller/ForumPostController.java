@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/forumpost")
+@RequestMapping("/api/posts")
 public class ForumPostController {
     private final ForumPostService forumPostService;
 
@@ -58,7 +58,7 @@ public class ForumPostController {
     @PutMapping("/id/{id}")
     public ResponseEntity<ForumPost> updatePost(@PathVariable Long id, @RequestBody ForumPost updatedPost) {
         updatedPost.setForumPostId(id);
-        ForumPost savedPost = forumPostService.savePost(updatedPost);
+        ForumPost savedPost = forumPostService.updatePost(updatedPost);
         return ResponseEntity.ok(savedPost);
     }
 }
