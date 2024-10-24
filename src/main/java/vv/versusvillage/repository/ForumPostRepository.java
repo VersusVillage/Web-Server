@@ -10,11 +10,11 @@ public interface ForumPostRepository {
 
     Optional<ForumPost> findById(Long id);
 
-    List<ForumPost> findByTitle(String title);
+    List<ForumPost> findByTitle(String title, String category);
 
-    List<ForumPost> findByAuthor(String nickname);
+    List<ForumPost> findByAuthor(String nickname, String category);
 
-    List<ForumPost> findAll();
+    List<ForumPost> findAll(String category);
 
     ForumPost update(ForumPost forumPost);
 

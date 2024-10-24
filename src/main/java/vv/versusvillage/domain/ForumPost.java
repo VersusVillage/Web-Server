@@ -8,12 +8,15 @@ import java.time.LocalDateTime;
 @Table(name = "forum_posts")
 public class ForumPost {
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "forum_post_id")
     private Long forumPostId;
 
     @Column(nullable = false)
     private String title;
+
+    @Column(nullable = false)
+    private String category;
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
@@ -40,6 +43,15 @@ public class ForumPost {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
 
     public LocalDateTime getCreatedAt() {
         return createdAt;

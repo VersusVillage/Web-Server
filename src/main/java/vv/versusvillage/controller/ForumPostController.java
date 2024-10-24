@@ -25,8 +25,8 @@ public class ForumPostController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ForumPost>> getAllPosts() {
-        List<ForumPost> posts = forumPostService.findAllPosts();
+    public ResponseEntity<List<ForumPost>> getAllPosts(@RequestParam String category) {
+        List<ForumPost> posts = forumPostService.findAllPosts(category);
         return ResponseEntity.status(HttpStatus.OK).body(posts);
     }
 
@@ -38,14 +38,14 @@ public class ForumPostController {
     }
 
     @GetMapping("/author/{nickname}")
-    public ResponseEntity<List<ForumPost>> getPostsByAuthor(@PathVariable String nickname) {
-        List<ForumPost> forumPosts = forumPostService.findPostsByAuthor(nickname);
+    public ResponseEntity<List<ForumPost>> getPostsByAuthor(@PathVariable String nickname, @RequestParam String category) {
+        List<ForumPost> forumPosts = forumPostService.findPostsByAuthor(nickname, category);
         return ResponseEntity.status(HttpStatus.OK).body(forumPosts);
     }
 
     @GetMapping("/title/{title}")
-    public ResponseEntity<List<ForumPost>> getPostsByTitle(@PathVariable String title) {
-        List<ForumPost> forumPosts = forumPostService.findPostsByAuthor(title);
+    public ResponseEntity<List<ForumPost>> getPostsByTitle(@PathVariable String title, @RequestParam String category) {
+        List<ForumPost> forumPosts = forumPostService.findPostsByAuthor(title, category);
         return ResponseEntity.status(HttpStatus.OK).body(forumPosts);
     }
 

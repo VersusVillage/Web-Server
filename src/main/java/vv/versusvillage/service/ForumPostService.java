@@ -35,18 +35,18 @@ public class ForumPostService {
     }
 
     @Transactional
-    public List<ForumPost> findPostsByAuthor(String nickname) {
-        return forumPostRepository.findByAuthor(nickname);
+    public List<ForumPost> findPostsByAuthor(String nickname, String category) {
+        return forumPostRepository.findByAuthor(nickname, category);
     }
 
     @Transactional
-    public List<ForumPost> findPostsByTitle(String title) {
-        return forumPostRepository.findByTitle(title);
+    public List<ForumPost> findPostsByTitle(String title, String category) {
+        return forumPostRepository.findByTitle(title, category);
     }
 
     @Transactional
-    public List<ForumPost> findAllPosts() {
-        return forumPostRepository.findAll();
+    public List<ForumPost> findAllPosts(String category) {
+        return forumPostRepository.findAll(category);
     }
 
     @Transactional

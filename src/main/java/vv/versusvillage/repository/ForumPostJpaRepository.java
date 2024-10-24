@@ -37,31 +37,30 @@ public class ForumPostJpaRepository implements ForumPostRepository {
     }
 
     @Override
-    public List<ForumPost> findByTitle(String title) {
-        List<ForumPost> forumPosts = em.createQuery("select f from ForumPost f where f.title LIKE :title", ForumPost.class)
+    public List<ForumPost> findByTitle(String title, String category) {
+        return em.createQuery("select f from ForumPost f where f.title LIKE :title and f.category = :category", ForumPost.class)
                 .setParameter("title", "%" + title + "%")
+                .setParameter("category", category)
                 .getResultList();
-        return forumPosts;
     }
 
     @Override
-    public List<ForumPost> findByAuthor(String nickname) {
-        List<ForumPost> forumPosts = em.createQuery("select f from ForumPost f where f.author = :author", ForumPost.class)
+    public List<ForumPost> findByAuthor(String nickname, String category) {
+        return em.createQuery("select f from ForumPost f where f.author = :author and f.category = :category", ForumPost.class)
                 .setParameter("author", nickname)
+                .setParameter("category", category)
                 .getResultList();
-        return forumPosts;
     }
 
     @Override
-    public List<ForumPost> findAll() {
-        return em.createQuery("select f from ForumPost f", ForumPost.class).getResultList();
+    public List<ForumPost> findAll(String category) {
+        return em.createQuery("select f from ForumPost f where f.category = :category", ForumPost.class)
+                .setParameter("category", category)
+                .getResultList();
     }
 
     @Override
     public void delete(ForumPost forumPost) {
         em.remove(forumPost);
-//        em.createQuery("delete from ForumPost f where f.forumPostId = :id", ForumPost.class)
-//                .setParameter("id", id)
-//                .executeUpdate();
     }
 }
